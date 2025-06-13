@@ -1,6 +1,76 @@
+[project]
+name = "roll"
+version = "0.1.0"
+description = "ROLL: Reinforcement Learning from Logical Feedback for Large Language Models"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "Apache 2.0"}
+dependencies = [
+    "ray",
+    "numpy<2.0a0,>=1.25",
+    "tensordict",
+    "sympy==1.13.1",
+    "transformers>=4.51.1",
+    "modelscope",
+    "datasets==3.1.0",
+    "tqdm",
+    "peft==0.12.0",
+    "tyro>=0.5.7",
+    "accelerate==0.34.2",
+    "pydantic",
+    "pytest",
+    "loralib",
+    "einops",
+    "isort",
+    "jsonlines",
+    "deprecated",
+    "trl==0.9.6",
+    # "pyext", # conflict: python>=3.11. Only used by roll/utils/local_code/testing_util.py
+    "dacite",
+    "codetiming",
+    "more_itertools",
+    "wandb",
+    "math-verify",
+    "openai",
+    "gym",
+    "gymnasium[toy-text]",
+    "gym_sokoban",
+    "hydra-core",
+    "omegaconf",
+    "latex2sympy2==1.5.4",
+    "latex2sympy2_extended==1.10.1",
+    "antlr4-python3-runtime==4.9.3",
+    "torch==2.6.0.*",
+    "torchvision==0.21.0.*",
+    "torchaudio==2.6.0.*",
+    "flash-attn",
+    "transformer-engine[pytorch]==2.2.0",
+    "deepspeed==0.16.4",
+]
+
+[project.optional-dependencies]
+# All versions conflict with sglang on xgrammar; disable for now.
+#vllm = [
+#    "vllm==0.8.4",
+#]
+sglang = [
+    "sglang[srt,torch-memory-saver]==0.4.6.post4",
+    "cuda-bindings==12.9.0",
+]
+
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"
+
+[tool.uv]
+no-build-isolation-package = ["transformer-engine-torch", "transformer-engine", "flash-attn"]
+
+[tool.uv.build-backend]
+module-root = "."
+
 [tool.black]
 line-length = 119
-target-version = ['py310']
+target-version = ['py312']
 
 [tool.ruff]
 ignore = ["E501", "E741", "W605"]
